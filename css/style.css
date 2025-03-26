@@ -1,0 +1,292 @@
+:root {
+  --primary-color: #ff0000;
+  --secondary-color: #2196f3;
+  --text-color: #333;
+  --background-color: #f4f4f4;
+  --white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: white;
+}
+
+header {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+header nav {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: space-between; /* Giãn cách đều giữa logo và menu */
+  padding: 10px 20px;
+}
+
+main {
+  height: 50%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center; /* Căn giữa các mục trong menu theo chiều dọc */
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  font-size: 1rem; /* Đồng bộ kích thước chữ */
+  text-decoration: none;
+  color: #000;
+  font-weight: 350;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Đảm bảo logo không bị lệch */
+.logo img {
+  max-height: 50px; /* Giới hạn chiều cao logo */
+  object-fit: contain;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 3rem 5%;
+}
+
+.welcome-section {
+  padding: 8rem 5% 4rem;
+  text-align: center;
+  background-color: gray;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.welcome-section h1 {
+  font-size: 2rem; /* Tăng kích thước chữ tiêu đề */
+  font-weight: bold; /* Làm chữ đậm hơn */
+  margin-bottom: 1rem; /* Thêm khoảng cách dưới chữ */
+}
+
+.welcome-section p {
+  font-size: 1rem; /* Tăng kích thước chữ đoạn văn */
+  margin-bottom: 2rem; /* Thêm khoảng cách dưới đoạn văn */
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #ff0000;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #ff0000;
+}
+
+.featured-products {
+  padding: 4rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-products h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Đảm bảo lưới sản phẩm linh hoạt */
+  gap: 2rem; /* Khoảng cách giữa các thẻ sản phẩm */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h3 {
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #ff0000;
+}
+
+.product-card img {
+  width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của thẻ cha */
+  aspect-ratio: 1 / 1; /* Đặt tỷ lệ khung hình 1:1 để ảnh vuông */
+  object-fit: cover; /* Cắt ảnh để vừa khung mà không bị méo */
+  border-radius: 8px; /* Bo góc ảnh */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.product-card {
+  display: flex;
+  flex-direction: column; /* Sắp xếp nội dung theo cột */
+  justify-content: space-between; /* Căn đều nội dung trong thẻ */
+  height: 100%; /* Đảm bảo chiều cao đồng đều */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Bo góc */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Căn giữa nội dung */
+}
+
+.product-card .product-info {
+  flex-grow: 1; /* Đẩy nội dung phía trên nút xuống */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card h3 {
+  font-size: 1.2rem; /* Kích thước chữ cho tên sản phẩm */
+  margin: 10px 0; /* Tạo khoảng cách trên và dưới tên sản phẩm */
+  min-height: 50px; /* Đảm bảo chiều cao cố định cho tên sản phẩm */
+}
+
+.product-card p {
+  font-size: 0.9rem; /* Kích thước chữ cho mô tả */
+  color: #555; /* Màu chữ nhạt hơn */
+  margin-bottom: 15px; /* Khoảng cách dưới mô tả */
+  min-height: 40px; /* Đảm bảo chiều cao cố định cho mô tả */
+}
+
+.product-card .product-price {
+  font-size: 1.1rem; /* Kích thước chữ cho giá */
+  font-weight: bold; /* Làm giá in đậm */
+  color: #ff0000; /* Màu đỏ nổi bật */
+  margin-bottom: 15px; /* Khoảng cách dưới giá */
+  min-height: 30px; /* Đảm bảo chiều cao cố định cho giá */
+  display: flex;
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+}
+
+.product-card button {
+  margin-top: auto; /* Đẩy nút xuống đáy thẻ */
+  padding: 10px 15px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #ff0000;
+}
+
+/* Căn chỉnh và làm đẹp phần user menu */
+#user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Khoảng cách giữa các phần tử */
+}
+
+#user-menu span {
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+#user-menu a {
+  font-size: 1rem; /* Đồng bộ kích thước chữ */
+  padding: 0.5rem 1rem; /* Tăng khoảng cách bên trong */
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#user-menu a:hover {
+  background-color: var(--primary-color); /* Màu nền khi hover */
+  color: white;
+}
+
+#user-menu a.btn-primary {
+  background-color: var(--primary-color); /* Sử dụng màu xanh chính */
+  color: white;
+  border: none;
+}
+
+#user-menu a.btn-primary:hover {
+  background-color: darkblue; /* Màu xanh đậm hơn khi hover */
+  color: white;
+}
+
+#user-menu a.btn-outline-primary {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+#user-menu a.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#user-menu a.btn-outline-danger {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+#user-menu a.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}

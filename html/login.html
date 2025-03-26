@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập - TTG Shop</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .form-container {
+        max-width: 400px;
+        margin: 120px auto 40px;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      .error-message {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: none;
+      }
+
+      .show-error {
+        display: block;
+      }
+
+      .form-submit {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .form-submit:hover {
+        background-color: #45a049;
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .register-link a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .register-link a:hover {
+        text-decoration: underline;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .remember-me input {
+        width: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="../html/index.html">
+            <img src="../img/logo.webp" alt="TTGShop Logo" />
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="products.html">Sản phẩm</a></li>
+          <li>
+            <a href="cart.html"
+              >Giỏ hàng <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count">0</span></a
+            >
+          </li>
+          <li id="user-menu">
+            <a href="../html/login.html" class="active" style="margin-right: 10px; font-weight: bold;">Đăng nhập</a>
+            <a href="../html/register.html" style="font-weight: bold;">Đăng ký</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="form-container">
+        <h2 style="text-align: center; margin-bottom: 2rem">Đăng nhập</h2>
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" name="username" required />
+            <div class="error-message" id="username-error">
+              Vui lòng nhập tên đăng nhập
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" required />
+            <div class="error-message" id="password-error">
+              Vui lòng nhập mật khẩu
+            </div>
+          </div>
+
+          <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember" />
+            <label for="remember">Ghi nhớ đăng nhập</label>
+          </div>
+
+          <button type="submit" class="form-submit">Đăng nhập</button>
+
+          <div class="register-link">
+            Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+      function handleLogin(event) {
+        event.preventDefault();
+
+        // Reset error messages
+        document
+          .querySelectorAll(".error-message")
+          .forEach((el) => el.classList.remove("show-error"));
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Validate input
+        if (!username) {
+          document.getElementById("username-error").classList.add("show-error");
+          return;
+        }
+
+        if (!password) {
+          document.getElementById("password-error").classList.add("show-error");
+          return;
+        }
+
+        // Attempt login
+        if (login(username, password)) {
+          window.location.href = "index.html";
+        } else {
+          alert("Tên đăng nhập hoặc mật khẩu không chính xác");
+        }
+      }
+    </script>
+  </body>
+</html>

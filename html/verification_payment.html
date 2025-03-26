@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Verification - TTG Shop</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .verification-container {
+        max-width: 400px;
+        margin: 120px auto 40px;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .verification-container h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .captcha {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .captcha img {
+        height: 50px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      .form-submit {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .form-submit:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="../html/index.html">
+            <img src="../img/logo.webp" alt="TTGShop Logo" />
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="products.html">Sản phẩm</a></li>
+          <li>
+            <a href="cart.html"
+              >Giỏ hàng <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count">0</span></a
+            >
+          </li>
+          <li id="user-menu">
+            <a
+              href="../html/login.html"
+              style="margin-right: 10px; font-weight: bold"
+              >Đăng nhập</a
+            >
+            <a href="../html/register.html" style="font-weight: bold"
+              >Đăng ký</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="verification-container">
+        <h2>Payment Verification</h2>
+        <p style="text-align: center; margin-bottom: 1.5rem">
+          Please complete the CAPTCHA to verify your payment.
+        </p>
+        <form
+          id="payment-verification-form"
+          onsubmit="handlePaymentVerification(event)"
+        >
+          <div class="captcha">
+            <img src="../img/captcha_example.jpg" alt="CAPTCHA" />
+            <button type="button" onclick="reloadCaptcha()">↻</button>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="captcha-code"
+              name="captcha-code"
+              placeholder="Enter CAPTCHA"
+              required
+            />
+          </div>
+          <button type="submit" class="form-submit">Verify</button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      function reloadCaptcha() {
+        alert("CAPTCHA reloaded!");
+        // Logic to reload CAPTCHA image can be added here
+      }
+
+      function handlePaymentVerification(event) {
+        event.preventDefault();
+        const captchaCode = document.getElementById("captcha-code").value;
+      
+        // Đáp án đúng của CAPTCHA mẫu
+        const correctAnswer = "smwm";
+      
+        if (captchaCode === correctAnswer) {
+          alert("Payment verified successfully!");
+          window.location.href = "invoice.html"; // Chuyển hướng đến trang hóa đơn
+        } else {
+          alert("Invalid CAPTCHA. Please try again.");
+        }
+      }
+    </script>
+  </body>
+</html>

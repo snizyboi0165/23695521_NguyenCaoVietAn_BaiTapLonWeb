@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán - TTG Shop</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .checkout-page {
+        padding: 100px 5% 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 2rem;
+      }
+
+      .checkout-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-summary {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        align-self: start;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .order-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .order-item img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .item-info {
+        flex: 1;
+      }
+
+      .item-info h4 {
+        margin: 0 0 0.25rem;
+      }
+
+      .item-quantity {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5rem 0;
+      }
+
+      .total {
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-top: 2px solid #ddd;
+        padding-top: 1rem;
+        margin-top: 1rem;
+      }
+
+      .place-order-btn {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+      }
+
+      .place-order-btn:hover {
+        background-color: #45a049;
+      }
+
+      .payment-methods {
+        margin: 1rem 0;
+      }
+
+      .payment-method {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
+
+      .payment-method:hover {
+        border-color: var(--primary-color);
+      }
+
+      .payment-method input {
+        margin: 0;
+      }
+
+      @media (max-width: 968px) {
+        .checkout-page {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="../html/index.html">
+            <img src="../img/logo.webp" alt="TTGShop Logo" />
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="products.html">Sản phẩm</a></li>
+          <li>
+            <a href="cart.html"
+              >Giỏ hàng <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count">0</span></a
+            >
+          </li>
+          <li id="user-menu">
+            <a
+              href="../html/login.html"
+              style="margin-right: 10px; font-weight: bold"
+              >Đăng nhập</a
+            >
+            <a href="../html/register.html" style="font-weight: bold"
+              >Đăng ký</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="checkout-page">
+      <div class="checkout-form">
+        <h2>Thông tin thanh toán</h2>
+        <form id="checkout-form" onsubmit="handleCheckout(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Họ</label>
+              <input type="text" id="firstName" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Tên</label>
+              <input type="text" id="lastName" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input type="tel" id="phone" required />
+          </div>
+
+          <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <input type="text" id="address" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">Thành phố</label>
+              <input type="text" id="city" required />
+            </div>
+            <div class="form-group">
+              <label for="district">Quận/Huyện</label>
+              <input type="text" id="district" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="note">Ghi chú</label>
+            <textarea id="note" rows="3"></textarea>
+          </div>
+
+          <h3>Phương thức thanh toán</h3>
+          <div class="payment-methods">
+            <label class="payment-method">
+              <input type="radio" name="payment" value="cod" checked />
+              <span>Thanh toán khi nhận hàng (COD)</span>
+            </label>
+            <label class="payment-method">
+              <input type="radio" name="payment" value="bank" />
+              <span>Chuyển khoản ngân hàng</span>
+            </label>
+            <label class="payment-method">
+              <input type="radio" name="payment" value="momo" />
+              <span>Ví MoMo</span>
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <div class="order-summary">
+        <h3>Đơn hàng của bạn</h3>
+        <div id="order-items">
+          <!-- Order items will be loaded here -->
+        </div>
+        <button
+          class="place-order-btn"
+          onclick="document.getElementById('checkout-form').requestSubmit()"
+        >
+          Đặt hàng
+        </button>
+      </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+      function displayOrderSummary() {
+        const orderItems = document.getElementById("order-items");
+        let subtotal = 0;
+
+        const itemsHTML = cart
+          .map((item) => {
+            subtotal += item.price * item.quantity;
+            return `
+                    <div class="order-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-info">
+                            <h4>${item.name}</h4>
+                            <div class="item-quantity">Số lượng: ${
+                              item.quantity
+                            }</div>
+                            <div class="item-price">${formatPrice(
+                              item.price
+                            )} đ</div>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+
+        const summaryHTML = `
+                ${itemsHTML}
+                <div class="summary-item">
+                    <span>Tạm tính:</span>
+                    <span>${formatPrice(subtotal)} đ</span>
+                </div>
+                <div class="summary-item">
+                    <span>Phí vận chuyển:</span>
+                    <span>${formatPrice(30000)} đ</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Tổng cộng:</span>
+                    <span>${formatPrice(subtotal + 30000)} đ</span>
+                </div>
+            `;
+
+        orderItems.innerHTML = summaryHTML;
+      }
+
+      function handleCheckout(event) {
+        event.preventDefault();
+
+        // Thu thập thông tin đơn hàng
+        const order = {
+          items: cart,
+          customer: {
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            address: document.getElementById("address").value,
+            city: document.getElementById("city").value,
+            district: document.getElementById("district").value,
+            note: document.getElementById("note").value,
+          },
+          payment: document.querySelector('input[name="payment"]:checked')
+            .value,
+        };
+
+        // Lưu thông tin đơn hàng vào localStorage để sử dụng ở các trang khác
+        localStorage.setItem("currentOrder", JSON.stringify(order));
+
+        // Chuyển hướng đến trang xác thực thanh toán
+        window.location.href = "verification_payment.html";
+      }
+
+      // Initialize page
+      displayOrderSummary();
+    </script>
+  </body>
+</html>

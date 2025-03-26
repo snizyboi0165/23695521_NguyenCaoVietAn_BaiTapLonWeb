@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TTGShop | PC Cao Cấp</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="../css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="../html/index.html">
+            <img src="../img/logo.webp" alt="TTGShop Logo" />
+          </a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../html/index.html">Trang chủ</a></li>
+          <li><a href="../html/products.html">Sản phẩm</a></li>
+          <li>
+            <a href="../html/cart.html">
+              Giỏ hàng <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count">0</span>
+            </a>
+          </li>
+          <li id="user-menu">
+            <a href="../html/login.html" style="margin-right: 10px; font-weight: bold;">Đăng nhập</a>
+            <a href="../html/register.html" style="font-weight: bold;">Đăng ký</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="mt-1 pt-1">
+      <section class="text-center bg-secondary text-white py-5">
+        <div class="container">
+          <h1 class="display-4">Chào mừng đến với TTGShop</h1>
+          <p class="lead">
+            Khám phá các PC cấu hình khủng với giá cả hợp lý
+          </p>
+          <div class="row row-cols-2 row-cols-md-4 g-3 mt-4">
+            <div class="col d-flex align-items-center">
+              <img
+                src="../img/pcgaming.png"
+                alt="PC Gaming"
+                class="img-fluid rounded shadow-sm equal-img"
+              />
+            </div>
+            <div class="col d-flex align-items-center">
+              <img
+                src="../img/pcvanphong.png"
+                alt="PC Văn Phòng"
+                class="img-fluid rounded shadow-sm equal-img"
+              />
+            </div>
+            <div class="col d-flex align-items-center">
+              <img
+                src="../img/linhkien.png"
+                alt="Linh Kiện PC"
+                class="img-fluid rounded shadow-sm equal-img"
+              />
+            </div>
+            <div class="col d-flex align-items-center">
+              <img
+                src="../img/pcworkstation.png"
+                alt="PC Workstation"
+                class="img-fluid rounded shadow-sm equal-img"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="row-spec-pro">
+        <section class="featured-products">
+          <h2 class="text-center">Sản phẩm nổi bật</h2>
+          <div class="position-relative">
+            <!-- Carousel -->
+            <div id="featuredProductsCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                  <div class="row">
+                    <div class="col-md-4 d-flex align-items-stretch">
+                      <div class="card h-100 text-center">
+                        <img src="../img/pc2.png" class="card-img-top" alt="PC CHƠI GAME HIỆU SUẤT CAO RTX 3060 12GB - 12400F">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">PC CHƠI GAME HIỆU SUẤT CAO RTX 3060 12GB - 12400F</h5>
+                          <p class="card-text">ALL NEW- Bảo hành 36 Tháng</p>
+                          <p class="card-text text-danger mt-auto">15.280.000 đ</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-stretch">
+                      <div class="card h-100 text-center">
+                        <img src="../img/pc1.png" class="card-img-top" alt="PC ASUS GAMING PERFORMANCE RTX 4060 - I5 12400F">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">PC ASUS GAMING PERFORMANCE RTX 4060 - I5 12400F</h5>
+                          <p class="card-text">ALL NEW- Bảo hành 36 Tháng</p>
+                          <p class="card-text text-danger mt-auto">15.680.000 đ</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-stretch">
+                      <div class="card h-100 text-center">
+                        <img src="../img/pc3.png" class="card-img-top" alt="PC FASTER GAMING 10400F - RTX 3050 6GB">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">PC FASTER GAMING 10400F - RTX 3050 6GB</h5>
+                          <p class="card-text">ALL NEW- Bảo hành 36 Tháng</p>
+                          <p class="card-text text-danger mt-auto">9.900.000 đ</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                  <div class="row">
+                    <div class="col-md-4 d-flex align-items-stretch">
+                      <div class="card h-100 text-center">
+                        <img src="../img/pc4.png" class="card-img-top" alt="PC SUPER LUXURY ROG STRIX RYZEN 9 9950X- RTX 4090 24GB OC GAMING WHITE">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">PC SUPER LUXURY ROG STRIX RYZEN 9 9950X- RTX 4090 24GB OC GAMING WHITE</h5>
+                          <p class="card-text">ALL NEW- Bảo hành 36 Tháng</p>
+                          <p class="card-text text-danger mt-auto">186.888.888 đ</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-stretch">
+                      <div class="card h-100 text-center">
+                        <img src="../img/pc5.png" class="card-img-top" alt="PC Đồ Họa 2D i5 12400F - GTX 1650 4GB">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">PC Đồ Họa 2D i5 12400F - GTX 1650 4GB</h5>
+                          <p class="card-text">ALL NEW- Bảo hành 36 Tháng</p>
+                          <p class="card-text text-danger mt-auto">10.980.000 đ</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-stretch">
+                      <div class="card h-100 text-center">
+                        <img src="../img/pc6.png" class="card-img-top" alt="PC TTG HOME OFFICE Core i3 12100 - RAM 8GB- SSD 256GB- Màn hình 24 Inch">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">PC TTG HOME OFFICE Core i3 12100 - RAM 8GB- SSD 256GB- Màn hình 24 Inch</h5>
+                          <p class="card-text">ALL NEW- Bảo hành 36 Tháng</p>
+                          <p class="card-text text-danger mt-auto">8.860.000 đ</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Carousel controls -->
+            <button class="carousel-control-prev position-absolute top-50 translate-middle-y" type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide="prev" style="left: -50px;">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next position-absolute top-50 translate-middle-y" type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide="next" style="right: -50px;">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Về chúng tôi</h5>
+            <p>
+              TTGShop cung cấp các sản phẩm PC cao cấp với chất lượng hàng đầu.
+              Luôn tìm kiếm những sản phẩm vì game thủ.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Liên hệ</h5>
+            <p>Email: support@ttgshop.com</p>
+            <p>Phone: 0123-456-789</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Theo dõi chúng tôi</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
