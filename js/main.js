@@ -73,6 +73,62 @@ const products = [
     description: "Bảo hành 36 Tháng",
     category: "linh-kien",
   },
+  {
+    id: 10,
+    name: "PC Đồ Họa 2D i5 12400F - GTX 1660 Super 6GB",
+    price: 12680000,
+    image: "../img/pc7.png",
+    description: "ALL NEW - Bảo hành 36 Tháng",
+    category: "workstation",
+  },
+  {
+    id: 11,
+    name: "PC Workstation 2D 3D- Edit Video i5 14600K - 16GB DDR5 - GTX 1660 Super 6GB OC",
+    price: 20980000,
+    image: "../img/pc8.png",
+    description: "Bảo hành 36 Tháng",
+    category: "workstation",
+  },
+  {
+    id: 12,
+    name: "PC Workstation 2D 3D- Edit Video i9 13900K- RTX 3060 12GB",
+    price: 35680000,
+    image: "../img/pc9.png",
+    description: "Bảo hành 36 Tháng",
+    category: "workstation",
+  },
+  {
+    id: 13,
+    name: "PC TTG HOME OFFICE Core i5 14500 - RAM 16GB- SSD 500GB- Màn hình 24 Inch",
+    price: 15380000,
+    image: "../img/pc10.png",
+    description: "Bảo hành 36 Tháng",
+    category: "van-phong",
+  },
+  {
+    id: 14,
+    name: "PC TTG HOME OFFICE Core i5 12400 - RAM 16GB- SSD 256GB- Màn hình 24 Inch",
+    price: 10360000,
+    image: "../img/pc11.png",
+    description: "Bảo hành 36 Tháng",
+    category: "van-phong",
+  },
+  {
+    id: 15,
+    name: "PC TTG HOME OFFICE Core i7 12700 - RAM 16GB- SSD 500GB",
+    price: 13680000,
+    image: "../img/pc12.png",
+    description: "Bảo hành 36 Tháng",
+    category: "van-phong",
+  },
+  {
+    id: 16,
+    name: "TẢN NHIỆT NƯỚC ASUS ROG RYUJIN III 360 ARGB WHITE",
+    price: 9990000,
+    image: "../img/cooler.png",
+    description: "Bảo hành 36 Tháng",
+    category: "linh-kien",
+  },
 ];
 
 // Khởi tạo giỏ hàng
@@ -105,6 +161,9 @@ function addToCart(productId) {
 
   // Cập nhật số lượng hiển thị
   updateCartCount();
+
+  // Hiển thị thông báo
+  showNotification(`Đã thêm "${product.name}" vào giỏ hàng!`);
 }
 
 // Gọi hàm cập nhật số lượng khi tải trang
@@ -118,8 +177,17 @@ function showNotification(message) {
   notification.textContent = message;
   document.body.appendChild(notification);
 
+  // Thêm lớp "show" để hiển thị thông báo với hiệu ứng
   setTimeout(() => {
-    notification.remove();
+    notification.classList.add("show");
+  }, 10);
+
+  // Xóa thông báo sau 3 giây
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      notification.remove();
+    }, 300); // Đợi hiệu ứng ẩn hoàn tất trước khi xóa
   }, 3000);
 }
 
