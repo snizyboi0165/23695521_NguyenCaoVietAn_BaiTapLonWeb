@@ -56,7 +56,7 @@ TGT Shop là một website bán hàng trực tuyến chuyên cung cấp các s�
 - **CSS3**: Thiết kế giao diện và bố cục.
 - **JavaScript**: Xử lý logic, tương tác người dùng, và quản lý dữ liệu.
 - **Bootstrap**: Tạo giao diện responsive.
-- **LocalStorage & SessionStorage**: Lưu trữ dữ liệu người dùng và giỏ hàng.
+- **LocalStorage**: Lưu trữ dữ liệu người dùng và giỏ hàng.
 
 
 ## 🚀 Cách Chạy Dự Án
