@@ -213,7 +213,7 @@
           </div>
           <div class="col-md-4">
             <h5>Liên hệ</h5>
-            <p>Email: work_support@tgtshop.com</p> 
+            <p>Email: work_support@tgtshop.com</p>
             <p>Địa chỉ: 123, Quốc Lộ 13, HCM</p>
             <p>Phone: 0123-456-789</p>
           </div>
@@ -231,49 +231,57 @@
       </div>
     </footer>
     <script>
-      // Lấy thông tin đơn hàng từ localStorage
-      const order = JSON.parse(localStorage.getItem("currentOrder"));
+      document.addEventListener("DOMContentLoaded", () => {
+        // Xóa giỏ hàng khỏi localStorage
+        localStorage.removeItem("cart");
 
-      if (!order) {
-        alert("No order found!");
-        window.location.href = "index.html";
-      }
+        // Cập nhật hiển thị số lượng giỏ hàng (nếu có phần tử hiển thị số lượng)
+        const cartCount = document.getElementById("cart-count");
+        if (cartCount) {
+          cartCount.textContent = 0;
+        }
 
-      // Hiển thị thông tin khách hàng
-      document.getElementById("customer-name").textContent =
-        order.customer.firstName + " " + order.customer.lastName;
-      document.getElementById("customer-email").textContent =
-        order.customer.email;
-      document.getElementById("customer-phone").textContent =
-        order.customer.phone;
-      document.getElementById("customer-address").textContent =
-        order.customer.address +
-        ", " +
-        order.customer.district +
-        ", " +
-        order.customer.city;
+        // Hiển thị thông tin hóa đơn
+        const order = JSON.parse(localStorage.getItem("currentOrder"));
+        if (!order) {
+          alert("Không tìm thấy thông tin đơn hàng!");
+          window.location.href = "index.html";
+          return;
+        }
 
-      // Hiển thị danh sách sản phẩm
-      const itemsContainer = document.getElementById("invoice-items");
-      let total = 0;
-      order.items.forEach((item) => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
+        document.getElementById("customer-name").textContent =
+          order.customer.firstName + " " + order.customer.lastName;
+        document.getElementById("customer-email").textContent =
+          order.customer.email;
+        document.getElementById("customer-phone").textContent =
+          order.customer.phone;
+        document.getElementById("customer-address").textContent =
+          order.customer.address +
+          ", " +
+          order.customer.district +
+          ", " +
+          order.customer.city;
 
-        const row = `
-          <tr>
-            <td>${item.name}</td>
-            <td>${item.quantity}</td>
-            <td>${item.price.toLocaleString()} đ</td>
-            <td>${itemTotal.toLocaleString()} đ</td>
-          </tr>
-        `;
-        itemsContainer.innerHTML += row;
+        const itemsContainer = document.getElementById("invoice-items");
+        let total = 0;
+        order.items.forEach((item) => {
+          const itemTotal = item.price * item.quantity;
+          total += itemTotal;
+
+          const row = `
+            <tr>
+              <td>${item.name}</td>
+              <td>${item.quantity}</td>
+              <td>${item.price.toLocaleString()} đ</td>
+              <td>${itemTotal.toLocaleString()} đ</td>
+            </tr>
+          `;
+          itemsContainer.innerHTML += row;
+        });
+
+        document.getElementById("invoice-total").textContent =
+          total.toLocaleString() + " đ";
       });
-
-      // Hiển thị tổng tiền
-      document.getElementById("invoice-total").textContent =
-        total.toLocaleString() + " đ";
     </script>
   </body>
 </html>

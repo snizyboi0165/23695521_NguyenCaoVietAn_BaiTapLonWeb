@@ -131,13 +131,14 @@ const products = [
   },
 ];
 
-// User Authentication
 let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
-
 // Khởi tạo giỏ hàng
-let cart = currentUser
-  ? JSON.parse(localStorage.getItem("cart")) || []
-  : JSON.parse(sessionStorage.getItem("cart")) || []; // Lưu tạm trong sessionStorage nếu không đăng nhập
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Hàm lưu giỏ hàng vào localStorage
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 // Hàm cập nhật số lượng hiển thị giỏ hàng
 function updateCartCount() {
@@ -160,32 +161,22 @@ function addToCart(productId) {
   } else {
     cart.push({ ...product, quantity: 1 }); // Thêm sản phẩm mới
   }
-
-  // Lưu giỏ hàng vào localStorage nếu người dùng đã đăng nhập
-  if (currentUser) {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  } else {
-    // Lưu giỏ hàng vào sessionStorage nếu không đăng nhập
-    sessionStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  // Cập nhật số lượng hiển thị
-  updateCartCount();
-
-  // Hiển thị thông báo bằng alert
-  alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
+  saveCart(); // Lưu giỏ hàng vào localStorage
+  updateCartCount(); // Cập nhật số lượng hiển thị
+  alert(`Đã thêm sản phẩm vào giỏ hàng!`);
 }
 
 // Hàm xóa giỏ hàng khi người dùng đăng xuất
 function clearCartOnLogout() {
   cart = [];
-  localStorage.removeItem("cart");
-  sessionStorage.removeItem("cart"); // Xóa giỏ hàng tạm thời
+  saveCart(); // Xóa giỏ hàng khỏi localStorage
   updateCartCount();
 }
 
 // Gọi hàm cập nhật số lượng khi tải trang
 document.addEventListener("DOMContentLoaded", () => {
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+  updateCartDisplay();
   updateCartCount();
 });
 
@@ -193,9 +184,16 @@ function updateUserMenu() {
   const userMenu = document.getElementById("user-menu");
   if (currentUser) {
     userMenu.innerHTML = `
-            <span>Xin chào, ${currentUser.username}</span>
-            <a href="#" class="btn btn-outline-danger" onclick="logout()">Đăng xuất</a>
-        `;
+      <span id="welcome-message" class="me-3">
+        Xin chào, <strong id="username-display">${currentUser.username}</strong>
+      </span>
+      <a href="#" class="btn btn-outline-danger" onclick="logout()">Đăng xuất</a>
+    `;
+  } else {
+    userMenu.innerHTML = `
+      <a id="login-link" href="../html/login.html" class="btn btn-outline-primary me-2">Đăng nhập</a>
+      <a id="register-link" href="../html/register.html" class="btn btn-primary">Đăng ký</a>
+    `;
   }
 }
 
@@ -272,6 +270,7 @@ function formatPrice(price) {
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
+  currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
   displayFeaturedProducts();
   updateUserMenu();
 });

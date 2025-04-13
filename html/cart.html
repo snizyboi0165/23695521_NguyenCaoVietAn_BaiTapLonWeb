@@ -13,6 +13,17 @@
     <link rel="icon" type="image/png" href="../img/favicon.webp" />
     <link rel="shortcut icon" href="../img/favicon.webp" />
     <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Đảm bảo chiều cao tối thiểu của body là toàn màn hình */
+        margin: 0;
+      }
+
+      main.cart-page {
+        flex: 1; /* Đẩy footer xuống dưới nếu nội dung không đủ */
+      }
+
       .cart-page {
         padding: 100px 5% 40px;
         max-width: 1200px;
@@ -257,12 +268,6 @@
         <h2>Giỏ hàng của bạn</h2>
         <div id="cart-content">
           <!-- Cart items will be loaded here by JavaScript -->
-          <div class="cart-item">
-            <span class="product-name"
-              >PC CHƠI GAME HIỆU SUẤT CAO RTX 3060</span
-            >
-            <span class="product-price">15.280.000 đ</span>
-          </div>
         </div>
       </div>
     </main>
@@ -376,7 +381,7 @@
         const item = cart.find((item) => item.id === productId);
         if (item) {
           item.quantity = newQuantity;
-          localStorage.setItem("cart", JSON.stringify(cart));
+          saveCart(); // Lưu giỏ hàng vào localStorage
           updateCartDisplay();
           updateCartCount();
         }
@@ -384,7 +389,7 @@
 
       function removeFromCart(productId) {
         cart = cart.filter((item) => item.id !== productId);
-        localStorage.setItem("cart", JSON.stringify(cart));
+        saveCart(); // Lưu giỏ hàng vào localStorage
         updateCartDisplay();
         updateCartCount();
       }

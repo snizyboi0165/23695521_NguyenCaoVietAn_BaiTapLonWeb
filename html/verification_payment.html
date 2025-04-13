@@ -134,7 +134,7 @@
                   id="logout-link"
                   href="#"
                   class="btn btn-outline-danger d-none"
-                  onclick="handleLogout()"
+                  onclick="logout()"
                 >
                   Đăng xuất
                 </a>
@@ -184,7 +184,7 @@
           </div>
           <div class="col-md-4">
             <h5>Liên hệ</h5>
-            <p>Email: work_support@tgtshop.com</p> 
+            <p>Email: work_support@tgtshop.com</p>
             <p>Địa chỉ: 123, Quốc Lộ 13, HCM</p>
             <p>Phone: 0123-456-789</p>
           </div>
@@ -221,5 +221,12 @@
         }
       }
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+        updateUserMenu();
+      });
+    </script>
   </body>
 </html>
+  
