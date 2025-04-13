@@ -1,5 +1,5 @@
 # TTG Shop - Website Bán Hàng PC Cao Cấp
-![Logo TTGShop](./img/logo.webp)
+![Logo TTGShop](./img/logo.png)
 
 TTG Shop là một website bán hàng trực tuyến chuyên cung cấp các sản phẩm PC cao cấp, linh kiện máy tính, và các thiết bị văn phòng. Website được thiết kế với giao diện thân thiện, dễ sử dụng và tích hợp nhiều tính năng hỗ trợ người dùng.
 
