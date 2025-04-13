@@ -1,9 +1,9 @@
-# TTG Shop - Website Bán Hàng PC Cao Cấp
+# TGT Shop - Website Bán Hàng PC Cao Cấp
 ![Logo TTGShop](./img/logo.png)
 
-TTG Shop là một website bán hàng trực tuyến chuyên cung cấp các sản phẩm PC cao cấp, linh kiện máy tính, và các thiết bị văn phòng. Website được thiết kế với giao diện thân thiện, dễ sử dụng và tích hợp nhiều tính năng hỗ trợ người dùng.
+TGT Shop là một website bán hàng trực tuyến chuyên cung cấp các sản phẩm PC cao cấp, linh kiện máy tính, và các thiết bị văn phòng. Website được thiết kế với giao diện thân thiện, dễ sử dụng và tích hợp nhiều tính năng hỗ trợ người dùng.
 
-## Tính Năng Chính
+## Các chức năng chính
 
 ### 1. **Trang chủ**
 - Hiển thị các sản phẩm nổi bật với hình ảnh và thông tin chi tiết.
@@ -39,11 +39,13 @@ TTG Shop là một website bán hàng trực tuyến chuyên cung cấp các s�
 - Hiển thị tổng tiền thanh toán.
 - Có nút "In Hóa Đơn" để in hóa đơn.
 
-### 7. **Đăng ký và đăng nhập**
+### 7. **Đăng ký, đăng nhập và đăng xuất**
 - Đăng ký tài khoản với tên đăng nhập, email và mật khẩu.
+- Sau khi đăng ký, người dùng cần nhập mã xác thực để kích hoạt tài khoản.
 - Đăng nhập bằng tài khoản đã đăng ký.
 - Hiển thị tên người dùng sau khi đăng nhập.
 - Đăng xuất khỏi tài khoản.
+- Khi đăng xuất, giỏ hàng sẽ được xóa nếu người dùng đã đăng nhập trước đó.
 
 ### 8. **Quản lý người dùng**
 - Lưu thông tin người dùng và trạng thái đăng nhập bằng `localStorage`.
@@ -54,7 +56,7 @@ TTG Shop là một website bán hàng trực tuyến chuyên cung cấp các s�
 - **CSS3**: Thiết kế giao diện và bố cục.
 - **JavaScript**: Xử lý logic, tương tác người dùng, và quản lý dữ liệu.
 - **Bootstrap**: Tạo giao diện responsive.
-- **LocalStorage**: Lưu trữ dữ liệu người dùng và giỏ hàng.
+- **LocalStorage & SessionStorage**: Lưu trữ dữ liệu người dùng và giỏ hàng.
 
 
 ## 🚀 Cách Chạy Dự Án
