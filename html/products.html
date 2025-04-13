@@ -3,15 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sản phẩm - TTG Shop</title>
+    <title>Sản phẩm - TGT Shop</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <link rel="icon" type="image/png" href="../img/favicon.webp" />
+    <link rel="shortcut icon" href="../img/favicon.webp" />
     <style>
       .products-page {
-        padding: 100px 5% 40px;
+        padding: 50px 5% 40px;
         max-width: 1200px;
         margin: 0 auto;
       }
@@ -128,35 +131,84 @@
     </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <a href="../html/index.html">
-            <img src="../img/logo.webp" alt="TTGShop Logo" />
-          </a>
-        </div>
-        <ul class="nav-links">
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="products.html" class="active">Sản phẩm</a></li>
-          <li>
-            <a href="cart.html"
-              >Giỏ hàng <i class="fas fa-shopping-cart"></i>
-              <span id="cart-count">0</span></a
+    <div class="sticky-wrapper">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+          <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="../html/index.html">
+              <img src="../img/logo.png" alt="TGTShop Logo" height="50" />
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-          </li>
-          <li id="user-menu">
-            <a
-              href="../html/login.html"
-              style="margin-right: 10px; font-weight: bold"
-              >Đăng nhập</a
-            >
-            <a href="../html/register.html" style="font-weight: bold"
-              >Đăng ký</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </header>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/index.html"
+                    >Trang chủ</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/products.html"
+                    >Sản phẩm</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/cart.html">
+                    Giỏ hàng <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="badge bg-danger rounded-pill"
+                      >0</span
+                    >
+                  </a>
+                </li>
+              </ul>
+
+              <!-- User Actions -->
+              <div id="user-menu" class="d-flex align-items-center ms-3">
+                <span id="welcome-message" class="me-3 d-none">
+                  Xin chào, <strong id="username-display"></strong>
+                </span>
+                <a
+                  id="login-link"
+                  href="../html/login.html"
+                  class="btn btn-outline-primary me-2"
+                >
+                  Đăng nhập
+                </a>
+                <a
+                  id="register-link"
+                  href="../html/register.html"
+                  class="btn btn-primary"
+                >
+                  Đăng ký
+                </a>
+                <a
+                  id="logout-link"
+                  href="#"
+                  class="btn btn-outline-danger d-none"
+                  onclick="handleLogout()"
+                >
+                  Đăng xuất
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
 
     <main class="products-page">
       <div class="filters">
@@ -192,7 +244,35 @@
         <!-- Products will be loaded here by JavaScript -->
       </div>
     </main>
-
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Về chúng tôi</h5>
+            <p>
+              TGTShop cung cấp các sản phẩm PC cao cấp với chất lượng hàng đầu.
+              Luôn tìm kiếm những sản phẩm vì game thủ.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Liên hệ</h5>
+            <p>Email: work_support@tgtshop.com</p> 
+            <p>Địa chỉ: 123, Quốc Lộ 13, HCM</p>
+            <p>Phone: 0123-456-789</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Theo dõi chúng tôi</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script src="../js/main.js"></script>
     <script>
       let filteredProducts = [...products];

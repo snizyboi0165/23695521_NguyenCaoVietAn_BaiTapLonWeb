@@ -131,8 +131,13 @@ const products = [
   },
 ];
 
+// User Authentication
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+
 // Khởi tạo giỏ hàng
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = currentUser
+  ? JSON.parse(localStorage.getItem("cart")) || []
+  : JSON.parse(sessionStorage.getItem("cart")) || []; // Lưu tạm trong sessionStorage nếu không đăng nhập
 
 // Hàm cập nhật số lượng hiển thị giỏ hàng
 function updateCartCount() {
@@ -156,14 +161,27 @@ function addToCart(productId) {
     cart.push({ ...product, quantity: 1 }); // Thêm sản phẩm mới
   }
 
-  // Lưu giỏ hàng vào localStorage
-  localStorage.setItem("cart", JSON.stringify(cart));
+  // Lưu giỏ hàng vào localStorage nếu người dùng đã đăng nhập
+  if (currentUser) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  } else {
+    // Lưu giỏ hàng vào sessionStorage nếu không đăng nhập
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+  }
 
   // Cập nhật số lượng hiển thị
   updateCartCount();
 
-  // Hiển thị thông báo
-  showNotification(`Đã thêm "${product.name}" vào giỏ hàng!`);
+  // Hiển thị thông báo bằng alert
+  alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
+}
+
+// Hàm xóa giỏ hàng khi người dùng đăng xuất
+function clearCartOnLogout() {
+  cart = [];
+  localStorage.removeItem("cart");
+  sessionStorage.removeItem("cart"); // Xóa giỏ hàng tạm thời
+  updateCartCount();
 }
 
 // Gọi hàm cập nhật số lượng khi tải trang
@@ -171,47 +189,21 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
 });
 
-function showNotification(message) {
-  const notification = document.createElement("div");
-  notification.className = "notification";
-  notification.textContent = message;
-  document.body.appendChild(notification);
-
-  // Thêm lớp "show" để hiển thị thông báo với hiệu ứng
-  setTimeout(() => {
-    notification.classList.add("show");
-  }, 10);
-
-  // Xóa thông báo sau 3 giây
-  setTimeout(() => {
-    notification.classList.remove("show");
-    setTimeout(() => {
-      notification.remove();
-    }, 300); // Đợi hiệu ứng ẩn hoàn tất trước khi xóa
-  }, 3000);
-}
-
-// User Authentication
-let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
-
 function updateUserMenu() {
   const userMenu = document.getElementById("user-menu");
   if (currentUser) {
     userMenu.innerHTML = `
             <span>Xin chào, ${currentUser.username}</span>
-            <a href="#" onclick="logout()">Đăng xuất</a>
+            <a href="#" class="btn btn-outline-danger" onclick="logout()">Đăng xuất</a>
         `;
   }
 }
 
-function login(username, password) {
-  // In a real app, this would validate against a backend
+function login(username, password, autoLogin = false) {
   const users = JSON.parse(localStorage.getItem("users")) || [];
-  const user = users.find(
-    (u) => u.username === username && u.password === password
-  );
+  const user = users.find((u) => u.username === username);
 
-  if (user) {
+  if (user && (autoLogin || user.password === password)) {
     currentUser = {
       username: user.username,
       email: user.email,
@@ -240,9 +232,11 @@ function register(username, email, password) {
   return true;
 }
 
+// Cập nhật hàm logout để xóa giỏ hàng
 function logout() {
   currentUser = null;
   localStorage.removeItem("currentUser");
+  clearCartOnLogout(); // Xóa giỏ hàng khi đăng xuất
   window.location.href = "index.html";
 }
 

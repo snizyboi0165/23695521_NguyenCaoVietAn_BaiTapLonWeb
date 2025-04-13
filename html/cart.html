@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Giỏ hàng - TTG Shop</title>
+    <title>Giỏ hàng - TGT Shop</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <link rel="icon" type="image/png" href="../img/favicon.webp" />
+    <link rel="shortcut icon" href="../img/favicon.webp" />
     <style>
       .cart-page {
         padding: 100px 5% 40px;
@@ -170,29 +173,84 @@
     </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <a href="../html/index.html">
-            <img src="../img/logo.webp" alt="TTGShop Logo" />
-          </a>
-        </div>
-        <ul class="nav-links">
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="products.html">Sản phẩm</a></li>
-          <li>
-            <a href="cart.html" class="active"
-              >Giỏ hàng <i class="fas fa-shopping-cart"></i>
-              <span id="cart-count">0</span></a
+    <div class="sticky-wrapper">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+          <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="../html/index.html">
+              <img src="../img/logo.png" alt="TGTShop Logo" height="50" />
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-          </li>
-          <li id="user-menu">
-            <a href="../html/login.html" style="margin-right: 10px; font-weight: bold;">Đăng nhập</a>
-            <a href="../html/register.html" style="font-weight: bold;">Đăng ký</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/index.html"
+                    >Trang chủ</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/products.html"
+                    >Sản phẩm</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/cart.html">
+                    Giỏ hàng <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="badge bg-danger rounded-pill"
+                      >0</span
+                    >
+                  </a>
+                </li>
+              </ul>
+
+              <!-- User Actions -->
+              <div id="user-menu" class="d-flex align-items-center ms-3">
+                <span id="welcome-message" class="me-3 d-none">
+                  Xin chào, <strong id="username-display"></strong>
+                </span>
+                <a
+                  id="login-link"
+                  href="../html/login.html"
+                  class="btn btn-outline-primary me-2"
+                >
+                  Đăng nhập
+                </a>
+                <a
+                  id="register-link"
+                  href="../html/register.html"
+                  class="btn btn-primary"
+                >
+                  Đăng ký
+                </a>
+                <a
+                  id="logout-link"
+                  href="#"
+                  class="btn btn-outline-danger d-none"
+                  onclick="handleLogout()"
+                >
+                  Đăng xuất
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
 
     <main class="cart-page">
       <div class="cart-container">
@@ -200,13 +258,43 @@
         <div id="cart-content">
           <!-- Cart items will be loaded here by JavaScript -->
           <div class="cart-item">
-            <span class="product-name">PC CHƠI GAME HIỆU SUẤT CAO RTX 3060</span>
+            <span class="product-name"
+              >PC CHƠI GAME HIỆU SUẤT CAO RTX 3060</span
+            >
             <span class="product-price">15.280.000 đ</span>
           </div>
         </div>
       </div>
     </main>
-
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Về chúng tôi</h5>
+            <p>
+              TGTShop cung cấp các sản phẩm PC cao cấp với chất lượng hàng đầu.
+              Luôn tìm kiếm những sản phẩm vì game thủ.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Liên hệ</h5>
+            <p>Email: work_support@tgtshop.com</p>
+            <p>Địa chỉ: 123, Quốc Lộ 13, HCM</p>
+            <p>Phone: 0123-456-789</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Theo dõi chúng tôi</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script src="../js/main.js"></script>
     <script>
       function updateCartDisplay() {
@@ -214,69 +302,67 @@
 
         if (cart.length === 0) {
           cartContent.innerHTML = `
-                    <div class="cart-empty">
-                        <p>Giỏ hàng của bạn đang trống</p>
-                        <a href="products.html" class="continue-shopping">
-                            <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
-                        </a>
-                    </div>
-                `;
+            <div class="cart-empty">
+              <p>Giỏ hàng của bạn đang trống</p>
+              <a href="products.html" class="continue-shopping">
+                <i class="fas fa-arrow-left"></i> Tiếp tục mua sắm
+              </a>
+            </div>
+          `;
           return;
         }
 
         let subtotal = 0;
         const cartHTML = `
-                <div class="cart-items">
-                    ${cart
-                      .map((item) => {
-                        subtotal += item.price * item.quantity;
-                        return `
-                            <div class="cart-item">
-                                <img src="${item.image}" alt="${item.name}">
-                                <div class="item-details">
-                                    <h3>${item.name}</h3>
-                                </div>
-                                <div class="item-price">${formatPrice(
-                                  item.price
-                                )} đ</div>
-                                <div class="quantity-controls">
-                                    <button onclick="updateQuantity(${
-                                      item.id
-                                    }, ${item.quantity - 1})">-</button>
-                                    <span>${item.quantity}</span>
-                                    <button onclick="updateQuantity(${
-                                      item.id
-                                    }, ${item.quantity + 1})">+</button>
-                                </div>
-                                <button class="remove-item" onclick="removeFromCart(${
-                                  item.id
-                                })">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        `;
-                      })
-                      .join("")}
-                </div>
-                <div class="cart-summary">
-                    <h3>Tổng đơn hàng</h3>
-                    <div class="summary-item">
-                        <span>Tạm tính:</span>
-                        <span>${formatPrice(subtotal)} đ</span>
+          <div class="cart-items">
+            ${cart
+              .map((item) => {
+                subtotal += item.price * item.quantity;
+                return `
+                  <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-details">
+                      <h3>${item.name}</h3>
                     </div>
-                    <div class="summary-item">
-                        <span>Phí vận chuyển:</span>
-                        <span>${formatPrice(30000)} đ</span>
+                    <div class="item-price">${formatPrice(item.price)} đ</div>
+                    <div class="quantity-controls">
+                      <button onclick="updateQuantity(${item.id}, ${
+                  item.quantity - 1
+                })">-</button>
+                      <span>${item.quantity}</span>
+                      <button onclick="updateQuantity(${item.id}, ${
+                  item.quantity + 1
+                })">+</button>
                     </div>
-                    <div class="summary-item total">
-                        <span>Tổng cộng:</span>
-                        <span>${formatPrice(subtotal + 30000)} đ</span>
-                    </div>
-                    <a href="checkout.html" class="checkout-btn">
-                        Tiến hành thanh toán
-                    </a>
-                </div>
-            `;
+                    <button class="remove-item" onclick="removeFromCart(${
+                      item.id
+                    })">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+          <div class="cart-summary">
+            <h3>Tổng đơn hàng</h3>
+            <div class="summary-item">
+              <span>Tạm tính:</span>
+              <span>${formatPrice(subtotal)} đ</span>
+            </div>
+            <div class="summary-item">
+              <span>Phí vận chuyển:</span>
+              <span>${formatPrice(30000)} đ</span>
+            </div>
+            <div class="summary-item total">
+              <span>Tổng cộng:</span>
+              <span>${formatPrice(subtotal + 30000)} đ</span>
+            </div>
+            <a href="checkout.html" class="checkout-btn">
+              Tiến hành thanh toán
+            </a>
+          </div>
+        `;
 
         cartContent.innerHTML = cartHTML;
       }
@@ -303,7 +389,7 @@
         updateCartCount();
       }
 
-      // Initial display
+      // Gọi hàm hiển thị giỏ hàng khi tải trang
       updateCartDisplay();
     </script>
   </body>
