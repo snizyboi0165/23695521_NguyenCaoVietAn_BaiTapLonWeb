@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết sản phẩm - TGT Shop</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="../img/favicon.webp" />
+    <link rel="shortcut icon" href="../img/favicon.webp" />
+    <style>
+      .product-detail-page {
+        padding: 50px 5% 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .product-detail-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        background: white;
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        max-width: 1000px;
+        margin: 50px auto;
+      }
+    
+      .product-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+    
+      .product-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        justify-content: center;
+        text-align: center;
+      }
+    
+      .product-info h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+    
+      .product-info .price {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+    
+      .product-info .description {
+        font-size: 1.2rem;
+        color: #555;
+      }
+    
+      .add-to-cart-btn {
+        padding: 1rem 2rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        text-align: center;
+        text-decoration: none;
+      }
+    
+      .add-to-cart-btn:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+      }
+      
+      .back-to-products {
+        color: red;
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+    
+      .back-to-products:hover {
+        color: darkred;
+        text-decoration: underline;
+      }
+      
+      @media (max-width: 768px) {
+        .product-detail-container {
+          grid-template-columns: 1fr;
+          padding: 2rem;
+        }
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+    
+      main {
+        flex: 1;
+      }
+    
+      footer {
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sticky-wrapper">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+          <div class="container">
+            <a class="navbar-brand" href="../html/index.html">
+              <img src="../img/logo.png" alt="TGTShop Logo" height="50" />
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/index.html"
+                    >Trang chủ</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/products.html"
+                    >Sản phẩm</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fw-semibold" href="../html/cart.html">
+                    Giỏ hàng <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="badge bg-danger rounded-pill"
+                      >0</span
+                    >
+                  </a>
+                </li>
+              </ul>
+              <div id="user-menu" class="d-flex align-items-center ms-3">
+                <span id="welcome-message" class="me-3 d-none">
+                  Xin chào, <strong id="username-display"></strong>
+                </span>
+                <a
+                  id="login-link"
+                  href="../html/login.html"
+                  class="btn btn-outline-primary me-2"
+                >
+                  Đăng nhập
+                </a>
+                <a
+                  id="register-link"
+                  href="../html/register.html"
+                  class="btn btn-primary"
+                >
+                  Đăng ký
+                </a>
+                <a
+                  id="logout-link"
+                  href="#"
+                  class="btn btn-outline-danger d-none"
+                  onclick="handleLogout()"
+                >
+                  Đăng xuất
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <main class="product-detail-page">
+      <div class="product-detail-container">
+        <div class="product-image">
+          <img id="product-image" src="" alt="Product Image" />
+        </div>
+        <div class="product-info">
+          <h1 id="product-name">Tên sản phẩm</h1>
+          <p class="price" id="product-price">Giá: 0₫</p>
+          <p class="description" id="product-description">Mô tả sản phẩm</p>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart(productId)"
+          >
+            Thêm vào giỏ hàng
+          </button>
+          <a href="products.html" class="back-to-products">Quay lại danh sách sản phẩm</a>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Về chúng tôi</h5>
+            <p>
+              TGTShop cung cấp các sản phẩm PC cao cấp với chất lượng hàng đầu.
+              Luôn tìm kiếm những sản phẩm vì game thủ.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Liên hệ</h5>
+            <p>Email: work_support@tgtshop.com</p> 
+            <p>Địa chỉ: 123, Quốc Lộ 13, HCM</p>
+            <p>Phone: 0123-456-789</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Theo dõi chúng tôi</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script>
+      let productId = new URLSearchParams(window.location.search).get("id");
+      const product = products.find((p) => p.id == productId);
+
+      if (!product) {
+        alert("Sản phẩm không tồn tại!");
+        window.location.href = "products.html";
+      } else {
+        document.getElementById("product-image").src = product.image;
+        document.getElementById("product-name").textContent = product.name;
+        document.getElementById("product-price").textContent = `Giá: ${product.price.toLocaleString()}₫`;
+        document.getElementById("product-description").textContent = product.description;
+      }
+    </script>
+  </body>
+</html>

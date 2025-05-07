@@ -301,27 +301,26 @@
         const grid = document.getElementById("product-grid");
 
         if (filteredProducts.length === 0) {
-          grid.innerHTML =
-            '<div class="no-results">Không tìm thấy sản phẩm nào</div>';
+          grid.innerHTML = '<div class="no-results">Không tìm thấy sản phẩm nào</div>';
           return;
         }
 
         grid.innerHTML = filteredProducts
           .map(
             (product) => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        <div class="product-price">${formatPrice(
-                          product.price
-                        )} đ</div>
-                        <button class="btn" onclick="addToCart(${product.id})">
-                            Thêm vào giỏ hàng
-                        </button>
-                    </div>
+              <div class="product-card">
+                <a href="product-detail.html?id=${product.id}">
+                  <img src="${product.image}" alt="${product.name}">
+                </a>
+                <div class="product-info">
+                  <h3>${product.name}</h3>
+                  <p>${product.description}</p>
+                  <div class="product-price">${formatPrice(product.price)} đ</div>
+                  <button class="btn" onclick="addToCart(${product.id})">
+                    Thêm vào giỏ hàng
+                  </button>
                 </div>
+              </div>
             `
           )
           .join("");
