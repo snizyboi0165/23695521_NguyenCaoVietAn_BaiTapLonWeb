@@ -304,7 +304,7 @@
     <script>
       function updateCartDisplay() {
         const cartContent = document.getElementById("cart-content");
-
+      
         if (cart.length === 0) {
           cartContent.innerHTML = `
             <div class="cart-empty">
@@ -316,16 +316,21 @@
           `;
           return;
         }
-
+      
         let subtotal = 0;
+        const defaultImage = "../img/placeholder.png"; // Add a placeholder image in your project
         const cartHTML = `
           <div class="cart-items">
             ${cart
               .map((item) => {
+                if (!item.id || !item.price || !item.name) {
+                  return ""; // Skip malformed items
+                }
                 subtotal += item.price * item.quantity;
+                const imageSrc = item.image || defaultImage; // Use default image if item.image is missing
                 return `
                   <div class="cart-item">
-                    <img src="${item.image}" alt="${item.name}">
+                    <img src="${imageSrc}" alt="${item.name}">
                     <div class="item-details">
                       <h3>${item.name}</h3>
                     </div>
@@ -339,9 +344,7 @@
                   item.quantity + 1
                 })">+</button>
                     </div>
-                    <button class="remove-item" onclick="removeFromCart(${
-                      item.id
-                    })">
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">
                       <i class="fas fa-trash"></i>
                     </button>
                   </div>
@@ -368,30 +371,37 @@
             </a>
           </div>
         `;
-
+      
         cartContent.innerHTML = cartHTML;
       }
 
       function updateQuantity(productId, newQuantity) {
+        productId = Number(productId);
         if (newQuantity < 1) {
           removeFromCart(productId);
           return;
         }
-
+      
         const item = cart.find((item) => item.id === productId);
         if (item) {
           item.quantity = newQuantity;
-          saveCart(); // Lưu giỏ hàng vào localStorage
+          saveCart();
           updateCartDisplay();
           updateCartCount();
         }
       }
-
+      
       function removeFromCart(productId) {
+        productId = Number(productId);
+        const initialLength = cart.length;
         cart = cart.filter((item) => item.id !== productId);
-        saveCart(); // Lưu giỏ hàng vào localStorage
-        updateCartDisplay();
-        updateCartCount();
+        if (cart.length < initialLength) {
+          saveCart();
+          updateCartDisplay();
+          updateCartCount();
+        } else {
+          console.warn(`Không tìm thấy sản phẩm với ID ${productId} trong giỏ hàng.`);
+        }
       }
 
       // Gọi hàm hiển thị giỏ hàng khi tải trang

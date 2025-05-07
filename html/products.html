@@ -257,7 +257,33 @@
       let currentCategory = "all";
       let currentSort = "default";
       let searchTerm = "";
+      
+      document.addEventListener("DOMContentLoaded", () => {
+        updateCartCount(); // Cập nhật số lượng giỏ hàng trên header
+        updateProducts();
+      });
 
+      function addToCart(productId) {
+        productId = Number(productId);
+        const product = products.find((p) => p.id === productId);
+        if (!product) {
+          console.error(`Sản phẩm với ID ${productId} không tồn tại.`);
+          return;
+        }
+      
+        // Sử dụng biến cart toàn cục
+        const existingItem = cart.find((item) => item.id === productId);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+      
+        // Lưu giỏ hàng vào localStorage
+        saveCart();
+        updateCartCount();
+        alert(`Đã thêm sản phẩm vào giỏ hàng!`);
+      }
       function updateProducts() {
         // Filter by category
         let result = products;
@@ -266,7 +292,7 @@
             (product) => product.category === currentCategory
           );
         }
-
+    
         // Filter by search
         if (searchTerm) {
           const term = searchTerm.toLowerCase();
@@ -276,7 +302,7 @@
               product.description.toLowerCase().includes(term)
           );
         }
-
+    
         // Sort products
         switch (currentSort) {
           case "price-asc":
@@ -289,54 +315,66 @@
             result.sort((a, b) => a.name.localeCompare(b.name));
             break;
           case "name-desc":
-            result.sort((a, b) => b.name.localeCompare(a.name));
+            result.sort((a, b) => b.name.localeCompare(b.name));
             break;
         }
-
+    
         filteredProducts = result;
         displayProducts();
       }
-
+    
       function displayProducts() {
         const grid = document.getElementById("product-grid");
-
+    
         if (filteredProducts.length === 0) {
           grid.innerHTML = '<div class="no-results">Không tìm thấy sản phẩm nào</div>';
           return;
         }
-
+    
         grid.innerHTML = filteredProducts
           .map(
-            (product) => `
-              <div class="product-card">
-                <a href="product-detail.html?id=${product.id}">
-                  <img src="${product.image}" alt="${product.name}">
-                </a>
-                <div class="product-info">
-                  <h3>${product.name}</h3>
-                  <p>${product.description}</p>
-                  <div class="product-price">${formatPrice(product.price)} đ</div>
-                  <button class="btn" onclick="addToCart(${product.id})">
-                    Thêm vào giỏ hàng
-                  </button>
+            (product) => {
+              console.log(`Product ID: ${product.id}`); // Debug
+              return `
+                <div class="product-card">
+                  <a href="product-detail.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.name}">
+                  </a>
+                  <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <div class="product-price">${formatPrice(product.price)} đ</div>
+                    <button class="btn" data-product-id="${product.id}">
+                      Thêm vào giỏ hàng
+                    </button>
+                  </div>
                 </div>
-              </div>
-            `
+              `;
+            }
           )
           .join("");
+    
+        // Add event listeners to buttons
+        document.querySelectorAll(".btn[data-product-id]").forEach((button) => {
+          button.addEventListener("click", (e) => {
+            const productId = Number(e.target.dataset.productId);
+            console.log(`Adding product with ID: ${productId}`); // Debug
+            addToCart(productId);
+          });
+        });
       }
-
+    
       // Event Listeners
       document.getElementById("search").addEventListener("input", (e) => {
         searchTerm = e.target.value;
         updateProducts();
       });
-
+    
       document.getElementById("sort-by").addEventListener("change", (e) => {
         currentSort = e.target.value;
         updateProducts();
       });
-
+    
       document
         .getElementById("category-filters")
         .addEventListener("click", (e) => {
@@ -349,7 +387,7 @@
             updateProducts();
           }
         });
-
+    
       // Initial display
       updateProducts();
     </script>
