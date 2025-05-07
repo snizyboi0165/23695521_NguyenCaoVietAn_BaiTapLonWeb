@@ -132,7 +132,7 @@ const products = [
 ];
 
 let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
-// Khởi tạo giỏ hàng
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // Hàm lưu giỏ hàng vào localStorage
@@ -157,12 +157,12 @@ function addToCart(productId) {
   // Kiểm tra xem sản phẩm đã có trong giỏ chưa
   const existingItem = cart.find((item) => item.id === productId);
   if (existingItem) {
-    existingItem.quantity += 1; // Tăng số lượng nếu đã có
+    existingItem.quantity += 1;
   } else {
     cart.push({ ...product, quantity: 1 }); // Thêm sản phẩm mới
   }
-  saveCart(); // Lưu giỏ hàng vào localStorage
-  updateCartCount(); // Cập nhật số lượng hiển thị
+  saveCart();
+  updateCartCount();
   alert(`Đã thêm sản phẩm vào giỏ hàng!`);
 }
 
